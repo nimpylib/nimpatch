@@ -7,7 +7,7 @@ addPatch((2,1,1), true):
     newString(len)
 
   proc newSeqUninit*[T](len: Natural): seq[T] =
-    when declared(newSeqUninitialized):
+    when declared(newSeqUninitialized) and T is SomeNumber:
       newSeqUninitialized[T](len)
     elif declared(setLenUninit):
       result.setLenUninit(len)
