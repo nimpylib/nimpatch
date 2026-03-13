@@ -12,7 +12,13 @@ addPatch((2,3,1), true):
          a[3].toLowerAscii == 'n':
         res = -NaN
         return 4
-    parseutils.parseFloat(a, res)
+    when nimvm:
+      # NIM-BUG: https://github.com/nim-lang/Nim/issues/23936
+      # bypass
+      #  fixed on stable 2.0.10, devel 2.1.9
+      parseutils.parseFloat(a.toOpenArray(0, a.high), res)
+    else:
+      parseutils.parseFloat(a, res)
 
 when not hasBug:
   export parseFloat
