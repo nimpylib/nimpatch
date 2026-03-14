@@ -20,3 +20,8 @@ when not declared(setLenUninit):  # XXX: currently (as of 2.3.1), no such for JS
   # system only declares it
   #  `when defined(nimHasSetLengthSeqUninitMagic)`
   proc setLenUninit*[T](s: var seq[T], newlen: Natural) = s.setLen newLen
+
+when defined(js) and not declared(newSeqUninit):
+  proc newSeqUninit*[T](len: Natural): seq[T] = newSeq[T](len)
+
+
