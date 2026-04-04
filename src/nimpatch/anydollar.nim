@@ -1,4 +1,7 @@
 
+when defined(nimPreviewSlimSystem):
+  import std/assertions
+  import std/formatfloat
 import ./typeinfo
 import std/macros
 from std/strutils import addSep

@@ -11,4 +11,8 @@ addPatch(((2,3,1), (2,2,3)), defined(js)):
     else: system.`$` x
 
 when not hasBug:
-  proc `$`*(x: SomeFloat): string = system.`$`(x)
+  when defined(nimPreviewSlimSystem):
+    import std/formatfloat
+    proc `$`*(x: SomeFloat): string = formatfloat.`$`(x)
+  else:
+    proc `$`*(x: SomeFloat): string = system.`$`(x)
